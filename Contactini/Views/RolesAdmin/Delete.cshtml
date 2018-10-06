@@ -1,0 +1,39 @@
+﻿@model IdentitySample.Models.ApplicationRole
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2 class="well text-center">Supprimer la Role.</h2>
+
+<h3 class="alert alert-danger text-center">etes vous sure de supprimer ce role? </h3>
+<p>Supprimer cette role va décrocher tous les utilisateurs de ce role et non pas supprimer les utilisateurs eux meme.(Ca va pas supprimer des utilisateurs).</p>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Nom")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <button type="submit"  class="btn btn-primary"><span class="glyphicon glyphicon-trash"></span>Supprimer </button> |
+            <a class="btn btn-primary" href="@Url.Action("Index","RolesAdmin")" ><span class="glyphicon glyphicon-backward"></span> Retour</a>
+        </div>
+    }
+</div>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Contactini.Models.PrestaViewModel>
+@using Contactini.Models
+@{
+    ViewBag.Title = "prestaList";
+    Layout = "~/Views/Shared/ReceptionLayout.cshtml";
+}
+
+<h2 class="well text-center">Nos Prestataires</h2>
+
+
+
+
+
+
+@foreach (var item in Model)
+{
+    <div class="col-md-4">
+        <div class="card text-center">
+            @*<div class="card-header" style="background-color:@(item.State == Status.Open ? "dodgerblue":"grey")">*@
+            <div class="card-header" style="background-color:grey">
+                <h5 style="color:white;">
+                    Secteur : @Html.DisplayFor(modelItem => item.sector) | Domaine : @Html.DisplayFor(modelItem => item.domain)
+                </h5>
+            </div>
+            <div class="card-body" align="center">
+                <div>
+                    <h5 class="card-title well well-sm" style="width:50%;color:white; background-color:dodgerblue;">@Html.DisplayFor(modelItem => item.dispo)</h5>
+                </div>
+
+                <div class="row">
+
+                    <div>@Html.Image(@Url.Content(item.photoLink), "Profile photo", "190", "250")</div>
+
+
+                </div>
+
+            </div>
+            <div class="card-footer text-muted">
+                <div class="row center-block">
+                    @item.fullName:@item.titre
+                    @for (int i = 0; i < @item.stars; i++)
+                    {
+                        <span class="glyphicon glyphicon-star"></span>
+                    }
+                    @for (int i = @item.Nstars; i < 5; i++)
+                    {
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

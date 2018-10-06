@@ -1,0 +1,31 @@
+﻿@model Contactini.Models.Entities.Sector
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "";
+}
+
+
+
+<h4>Sure vous voulez supprimer ce secteur ( inclus tous ses domaines) ?</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Nom du secteur")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-default" />
+        </div>
+    }
+</div>

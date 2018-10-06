@@ -1,0 +1,65 @@
+﻿@model IdentitySample.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<h2 class="well text-center">Details d'utilisateurs .</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Nom d'utilisateur")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt>
+            @Html.DisplayName("Nom et prénom")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+        <dt>
+            @Html.DisplayName("Addresse")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DisplayAddress)
+        </dd>
+        <dt>
+            @Html.DisplayName("Email")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+    </dl>
+</div>
+<h4 class="well text-center">Roles de cet utilisateur</h4>
+@if (ViewBag.RoleNames.Count == 0)
+{
+    <hr />
+    <p>Cette Utilisateur n'a aucune role.</p>
+}
+
+<table class="table">
+
+    @foreach (var item in ViewBag.RoleNames)
+    {
+        <tr>
+            <td align="center">
+                @item
+            </td>
+        </tr>
+    }
+</table>
+<div align="center">
+    <a href="@Url.Action("Edit","UsersAdmin", new { id = Model.Id })" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Modifier </a>
+    <a href="@Url.Action("Index","UsersAdmin")" class="btn btn-primary"><span class="glyphicon glyphicon-backward"></span> Retour </a>
+
+    </div>
+
+
+

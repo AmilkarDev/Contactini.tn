@@ -1,0 +1,73 @@
+﻿
+@model Contactini.Models.Entities.Message
+
+@{
+    Layout = "";
+}
+<style>
+    .editor-multiline-field textarea {
+        width: 300px;
+        height: 200px;
+    }
+</style>
+@*@using (Html.BeginForm("send", "Missions", FormMethod.Post))*@
+@*{*@
+@*@Html.AntiForgeryToken()*@
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.Label("Titre", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @id = "title" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Message", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10 editor-multiline-field ">
+            @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control", @id = "message" }, @rows = "14", @cols = "40" })
+            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input data-target="#myModal3" data-toggle="modal" value="Envoyer" class="btn btn-primary glyphicon glyphicon-send" id="btnContact" />
+        </div>
+    </div>
+</div>
+@*}*@
+
+<script>
+    $(function () {
+        $("#btnContact").click(function () {
+            var mail = new Object();
+            mail.content = $('#message').val();
+            mail.title = $('#title').val();
+            if (mail != null) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Missions/contactClient",
+                    data: JSON.stringify(mail),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        // alert(response);
+                        //  $('#myModal2').hide();
+                        $('.contender2').empty().append(response);
+                        $('#myModal2').hide();
+                        //  $('#myModal3').show();
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            }
+        });
+    });
+</script>

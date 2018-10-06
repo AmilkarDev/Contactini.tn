@@ -1,0 +1,603 @@
+﻿@model IEnumerable<Contactini.Models.Entities.Mission>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+
+
+<header class="masthead">
+    <div class="container">
+        <div class="intro-text">
+            <div class="intro-lead-in">Bienvenue chez Contactini.tn!</div>
+            <div class="intro-heading">Trouvez le bon emploi</div>
+            <a class="btn btn-xl js-scroll-trigger" href="#services">Plus d'informations</a>
+        </div>
+    </div>
+</header>
+
+<!-- Services -->
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Services</h2>
+                <h3 class="section-subheading text-muted">Postulez ou cherchez des nouvelles missions</h3>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-4">
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="service-heading">trouvez un prestataire</h4>
+                @*<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>*@
+                <p class="text-muted">Votre entreprise a besoin de nouveau personnel , le deadline s'approche et t'a pas encore terminé , Trouvez les meilleur pretataires sur notre plateforme.</p>
+
+            </div>
+            <div class="col-md-4">
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="service-heading">Trouvez une mission</h4>
+                @*<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>*@
+                <p class="text-muted">vous cherchez votre prochaine mission ou emploi , vous avez l'expérience et la compétence demandé par le marché ,créez votre cv sur notre plateforme et postulez.</p>
+
+            </div>
+            <div class="col-md-4">
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="service-heading">Affaire sécurisé et réussi</h4>
+                @*<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>*@
+                <p class="text-muted">Vous avez raccroché une mission , vous avez trouvez la bonne prestataire, qu'attendez vous , finir la mission et noter le rendement, en attendant votre prochaine visite.</p>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Portfolio Grid -->
+<section class="bg-light" id="portfolio">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Missions</h2>
+                <h3 class="section-subheading text-muted">Par secteur et domaine.</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img class="img-fluid" src="~/img/portfolio/01-thumbnail.jpg" alt="">
+                </a>
+                <div class="portfolio-caption">
+                    <h4>Styliste</h4>
+                    <p class="text-muted">La mode</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a class="portfolio-link" data-toggle="modal" href="#portfolioModal2">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img class="img-fluid" src="~/img/portfolio/02-thumbnail.jpg" alt="">
+                </a>
+                <div class="portfolio-caption">
+                    <h4>Guide Touristique</h4>
+                    <p class="text-muted">Tourisme</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a class="portfolio-link" data-toggle="modal" href="#portfolioModal3">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img class="img-fluid" src="~/img/portfolio/web-developer.jpg" alt="">
+                </a>
+                <div class="portfolio-caption">
+                    <h4>Développeur</h4>
+                    <p class="text-muted">Technologie</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a class="portfolio-link" data-toggle="modal" href="#portfolioModal4">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img class="img-fluid" src="~/img/portfolio/04-thumbnail.jpg" alt="">
+                </a>
+                <div class="portfolio-caption">
+                    <h4>Photographe</h4>
+                    <p class="text-muted">Image de Marque</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a class="portfolio-link" data-toggle="modal" href="#portfolioModal5">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img class="img-fluid" src="~/img/portfolio/05-thumbnail.jpg" alt="">
+                </a>
+                <div class="portfolio-caption">
+                    <h4>Designer</h4>
+                    <p class="text-muted">Web Design</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a class="portfolio-link" data-toggle="modal" href="#portfolioModal6">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img class="img-fluid" src="~/img/portfolio/cve.jpg" alt="">
+                </a>
+                <div class="portfolio-caption">
+                    <h4>Constructeur</h4>
+                    <p class="text-muted">Ingénierie Civile</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- About -->
+<section id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">A propos de nous</h2>
+                <h3 class="section-subheading text-muted">la plateforme qui vous aide à réaliser votre projet.</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="timeline">
+                    <li>
+                        <div class="timeline-image">
+                            <img class="rounded-circle img-fluid" src="~/img/about/11.png" alt="">
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Première étape</h4>
+                                <h4 class="subheading">Une idée ou un besoin</h4>
+                            </div>
+                            <div class="timeline-body">
+                                @*<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>*@
+                                <p class="text-muted">Vous avez l'idée d'un projet ou besoins d'aide dans n'importe quel domaine, ne vous allez pas loin , la plateforme contactini.tn vous fournis les meilleurs prestataire du domaine demandé , allez entrez votre mission ainsi que tous les détails!</p>
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <img class="rounded-circle img-fluid" src="~/img/about/22.jpg" alt="">
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Deuxième étape</h4>
+                                <h4 class="subheading">Postuler vos candidatures</h4>
+                            </div>
+                            <div class="timeline-body">
+                                @*<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>*@
+                                <p class="text-muted">Une fois votre mission est sur notre plateform , elle sera accessible par tous les prestataires qui peuvent si intèrressé postulé en envoyant une lettre de motivation ou un message, puis vous pouvez consulter leurs candidatures et leurs cv à partir de l'espace prestataire !</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image">
+                            <img class="rounded-circle img-fluid" src="~/img/about/33.jpg" alt="">
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Troisieme étape</h4>
+                                <h4 class="subheading">Recrutement</h4>
+                            </div>
+                            <div class="timeline-body">
+                                @*<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>*@
+                                <p class="text-muted">Aprés avoir consulter toutes les candidatures reçues pour une mission spécifique,Vous pouvez choisir le prestataire de votre choix par accepter son candidature , une fois accepté, le prestataire sera notifié !</p>
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <img class="rounded-circle img-fluid" src="~/img/about/44.png" alt="">
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Quatrième étape</h4>
+                                <h4 class="subheading">Terminer La mission</h4>
+                            </div>
+                            <div class="timeline-body">
+                                @*<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>*@
+                                <p class="text-muted">Aprés fini la mission , de retour à notre plateform vous pouvez donnez vos avis que ce soit un prestataire ou un client afin de faciliter le choix pour vos missions prochaines et honorer les meilleurs utilisateurs</p>
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <h4>
+                                en attendant
+                                <br>votre prochaine
+                                <br>visite!
+                            </h4>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact -->
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Contact </h2>
+                <h3 class="section-subheading text-muted">Nous allons vous répondre le plus tot possible.</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <form id="contactForm" name="sentMessage" novalidate>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" id="name" type="text" placeholder="votre Nom *" required data-validation-required-message="Nom Obligatoire.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" id="email" type="email" placeholder="votre Email *" required data-validation-required-message="Adress email obligatoire.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" id="phone" type="tel" placeholder="votre téléphone *" required data-validation-required-message="Numéro de téléphone obligatoire.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <textarea class="form-control" id="message" placeholder="votre Message *" required data-validation-required-message="Message Obligatoire."></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12 text-center">
+                            <div id="success"></div>
+                            <button id="btnPost" class="btn btn-xl">Envoyer le Message</button>
+                            @*<button id="sendMessageButton" class="btn btn-xl" type="submit">Envoyer le Message</button>*@
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; Contactini.tn 2018</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li class="list-inline-item">
+                        <a href="#">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    @*<li class="list-inline-item">
+                            <a href="#">Privacy Policy</a>
+                        </li>*@
+                    <li class="list-inline-item">
+                        <a href="#" style="color:black;">Conditions d'utilisations</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Portfolio Modals -->
+<!-- Modal 1 -->
+<div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl"></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Mode et Style</h2>
+                            <p class="item-intro text-muted">Styliste Modéliste.</p>
+                            <img class="img-fluid d-block mx-auto" src="~/img/portfolio/01-full.jpg" alt="">
+                            <p>Mariant les formes, les lignes, les coloris et les tissus, le styliste cherche constamment à innover, notamment en utilisant des matières originales. Le stylisme et le modélisme sont deux étapes complémentaires du processus de création. Ces étapes peuvent être réalisées par une seule et même personne (styliste-modéliste) ou par deux personnes différentes (un styliste et un modéliste)!</p>
+                            @*<ul class="list-inline">
+                                    <li>Date: January 2017</li>
+                                    <li>Client: Threads</li>
+                                    <li>Category: Illustration</li>
+                                </ul>*@
+                            <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                <i class="fa fa-times"></i>
+                                Fermer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 2 -->
+<div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl"></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Tourisme</h2>
+                            <p class="item-intro text-muted">Guide Touristique.</p>
+                            <img class="img-fluid d-block mx-auto" src="~/img/portfolio/02-full.jpg" alt="">
+                            <p>
+                                Le métier de guide touristique consiste à prendre un groupe de touristes en charge
+                                et à assurer le bon déroulement de leurs visites et de leur voyage. Il est le garant du
+                                respect du contrat passé entre
+                                l'agence de voyage et les voyageurs en matière d'hébergement, de transport, d'excursions!
+                            </p>
+                            @*<ul class="list-inline">
+                                    <li>Date: January 2017</li>
+                                    <li>Client: Explore</li>
+                                    <li>Category: Graphic Design</li>
+                                </ul>*@
+                            <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                <i class="fa fa-times"></i>
+                                Fermer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 3 -->
+<div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl"></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Technologie et Innovation</h2>
+                            <p class="item-intro text-muted">Développeur Concepteur.</p>
+                            <img class="img-fluid d-block mx-auto" src="~/img/portfolio/webdev-full.jpg" alt="">
+                            <p>Le développeur, également appelé programmeur, est un informaticien qui oeuvre auprès des utilisateurs pour concevoir des logiciels adaptés à leurs besoins. De l'analyse à l'application en passant par la programmation, il connaît tous les rouages pour mettre au point des programmes informatiques sur mesure!</p>
+                            @*<ul class="list-inline">
+                                    <li>Date: January 2017</li>
+                                    <li>Client: Finish</li>
+                                    <li>Category: Identity</li>
+                                </ul>*@
+                            <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                <i class="fa fa-times"></i>
+                                Fermer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 4 -->
+<div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl"></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Project Name</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-fluid d-block mx-auto" src="~/img/portfolio/04-full.jpg" alt="">
+                            <p>
+                                Pour immortaliser un moment, le photographe ne se contente pas d’appuyer sur un bouton. Un minimum de préparation et de réglages techniques sont nécessaires. Le spécialiste de l’image doit ainsi faire attention au cadrage, à l’angle de prise de vue et à la lumière en prenant en compte le cahier des charges défini par son client (presse quotidienne, web press, édition, communication publicitaire et institutionnelle, événementiel, sites internet, publications spécialisées, magazines et catalogues, e-commerce, post-production…). Il doit savoir s’adapter à toutes les situations et mettre à l’aise les personnes qui constituent le sujet de la photo.
+                            </p>
+                            @*<ul class="list-inline">
+                                    <li>Date: January 2017</li>
+                                    <li>Client: Lines</li>
+                                    <li>Category: Branding</li>
+                                </ul>*@
+                            <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                <i class="fa fa-times"></i>
+                                Fermer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 5 -->
+<div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl"></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Web ,publicité et développement</h2>
+                            <p class="item-intro text-muted">Designer Web.</p>
+                            <img class="img-fluid d-block mx-auto" src="~/img/portfolio/05-full.jpg" alt="">
+                            <p>
+                                À l'heure du numérique, le webdesigner est un acteur essentiel d'Internet et des nouveaux formats numériques/digitaux. En parfait connaisseur des contraintes web (ergonomie, référencements, techniques de montage...), il œuvre suivant les demandes de ses clients pour concevoir et réaliser le design d'une interface Web/Mobile/Social tout en veillant à la valorisation de l'image de l'entreprise ou de l'organisation en question. Dans une équipe web il reçoit ses briefs des chefs de projets puis transmet ses réalisations aux intégrateurs web.!
+                            </p>
+                            @*<ul class="list-inline">
+                                    <li>Date: January 2017</li>
+                                    <li>Client: Southwest</li>
+                                    <li>Category: Website Design</li>
+                                </ul>*@
+                            <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                <i class="fa fa-times"></i>
+                                Fermer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 6 -->
+<div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl"></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Architecture et génie civile</h2>
+                            <p class="item-intro text-muted">Architecte / Constructeur des maisons.</p>
+                            <img class="img-fluid d-block mx-auto" src="~/img/portfolio/06-full.jpg" alt="">
+                            <p>
+                                Un architecte dessine, conçoit et supervise la construction d'un bâtiment, qu'il s'agisse d'une maison individuelle, de logements collectifs ou de bâtiments publics. Ce bâtisseur doit être à la fois créatif, à l'écoute des souhaits de ses clients, et respecter les nombreuses normes liées à la construction.
+                            </p>
+                            @*<ul class="list-inline">
+                                    <li>Date: January 2017</li>
+                                    <li>Client: Window</li>
+                                    <li>Category: Photography</li>
+                                </ul>*@
+                            <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                <i class="fa fa-times"></i>
+                                Fermer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bootstrap core JavaScript -->
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script src="~/vendor/popper/popper.min.js"></script>
+<script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Contact form JavaScript -->
+<script src="~/js/jqBootstrapValidation.js"></script>
+<script src="~/js/contact_me.js"></script>
+<script>
+        $(function () {
+            $("#btnPost").click(function () {
+                var mail = new Object();
+                mail.senderName = $('#name').val();
+                mail.senderEmail = $('#email').val();
+                mail.senderPhone = $('#phone').val();
+                mail.Content = $('#message').val();
+                if (mail != null) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Home/Send",
+                        data: JSON.stringify(mail),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            $('#contactForm')[0].reset();
+                            new $.Zebra_Dialog(response,{
+                                type: 'confirmation',
+                                title: 'Confirmation'
+                            });
+                        //    $('.modal-body').html(response);
+                           
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+@*@Scripts.Render("~/bundles/jqueryval")*@

@@ -1,0 +1,60 @@
+﻿@model Contactini.Models.Entities.Language
+
+@{
+    ViewBag.Title = "LangUpdate";
+    Layout = "~/Views/Shared/BusinessLayout.cshtml";
+}
+
+<h2 class="well text-center">LangUpdate</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.Label("Langue", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LanguageName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LanguageName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+       
+
+        <div class="form-group">
+            @Html.Label("Niveau", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.LangProficiency, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LangProficiency, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+                <div class="col-md-3">
+                    <a href="@Url.Action("Index","myCV")" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-backward"></span>Retour
+                    </a>
+
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-floppy-disk"></span>Enregistrer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

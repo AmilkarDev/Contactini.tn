@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Contactini.Models.Entities.Education>
+@{ 
+    Layout = "";
+}
+<div class="panel panel-default">
+    <div style="margin-left:3%; margin-top: 2%;">
+        <span class="IconTitle" style="background-color:#5cb85c">
+            <span class="glyphicon glyphicon-education" aria-hidden="true" style="margin-left:26px; margin-top: 23px; color:#FFF;"></span>
+        </span>
+        <h4 style="margin-left: 12%; margin-top: -6%;">Education</h4>
+        <a href="@Url.Action("EduCreate","myCV")" class="btn btn-primary pull-right" style="margin-top:-6%;margin-right:5px;">
+            <span class="glyphicon glyphicon-plus"></span>Nouveau
+        </a>
+    </div>
+    <div class="panel-body">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var education in Model)
+            {
+                <div class="box">
+                    <div class="details">
+
+                        <p style="margin-left: 4%;">
+                            <b> @string.Format("{0} : {1}", education.InstituteUniversity, education.TitleOfDiploma) </b>
+
+                            
+                            <span class="yearStyle" style=" background-color: #5cb85c;"> @string.Format("{0: yyyy} - {1: yyyy}", education.FromYear, education.ToYear)</span>
+                            
+                           <a href="@Url.Action("EduDelete","myCV", new {id = education.ID })" class="pull-right" ><span class="glyphicon glyphicon-remove"></span> Supprimer</a>  |  <a href="@Url.Action("EduUpdate","myCV", new {id = education.ID })" class="pull-right" style="margin-right:5px;"><span class="glyphicon glyphicon-edit"></span> modifier</a>
+                            <br>
+                            <span>@education.Degree</span><br>
+                            <span> <i> @string.Format("{0} | {1}", @education.City, @education.Country) </i></span>
+                        </p>
+                    </div> <!--END DETAILS-->
+                </div> <!--END BOX-->
+            }
+        }
+    </div> <!-- END PANEL BODY -->
+</div>

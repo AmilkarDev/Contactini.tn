@@ -1,0 +1,111 @@
+﻿@model Contactini.Models.Entities.Realisation
+@{
+    Layout = "";
+}
+<style>
+    .counter {
+        background-color: black;
+        color: white;
+        font-size: 15px;
+        width: 30px;
+        position: absolute;
+        display: inline;
+        margin-top: -10px;
+        float: left;
+        font-weight: bold;
+        top: 50%;
+        right: 240px;
+        margin-left: 10px;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Opinion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.TextAreaFor(model => model.Opinion, new { htmlAttributes = new { @class = "form-control", @id = "opinion" }, @rows = 10, @cols = 50 })
+                @Html.ValidationMessageFor(model => model.Opinion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Stars, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div id="rateYo"></div>
+                <div class="counter"></div>
+                <div hidden="hidden">
+                    @*use usual input instead of editor for and shit*@
+                    @*<input type="number" name="review" id="stars" class="form-control" placeholder="review" value="3" />*@
+                    @*<input id="stars" value="2" name="star" type="number">*@
+                    @Html.EditorFor(model => model.Stars, new { htmlAttributes = new { @class = "form-control", @id = "stars" } })
+                    @Html.ValidationMessageFor(model => model.Stars, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @*<button type="submit" value="Valider" class="btn btn-primary"><span class="glyphicon glyphicon-check">Valider</span></button>*@
+                <button id="btnValidate" class="btn btn-outline-primary">valider</button>
+            </div>
+        </div>
+    </div>
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        var rate = $('#stars').val();
+        $(function () {
+
+            $("#rateYo").rateYo({
+                starWidth: "40px",
+                multiColor: true,
+                
+                precision: 1,
+                maxValue: 5,
+                rating: rate,
+                onChange: function (rating, rateYoInstance) {
+
+                    $(this).next().text(rating);
+                }
+              
+            });
+        });
+        $(function () {
+
+            $("#rateYo").rateYo()
+                .on("rateyo.change", function (e, data) {
+
+                    var rating = data.rating;
+                    $(this).next().text(rating);
+                    $('#stars').val(rating);
+                });
+        });
+
+        //$(function () {
+        //    $("#rateYo").rateYo()
+        //        .on("rateyo.set", function (e, data) {
+        //            $("#stars").val(data.rating);
+        //            alert("The rating is set to " + data.rating + "!");
+        //        });
+        //});
+
+
+    });
+
+
+
+</script>

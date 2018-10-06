@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Contactini.Models.Entities.workExperience>
+
+@{
+    ViewBag.Title = "Experience";
+    Layout = "";
+}
+<div class="panel panel-default">
+    <div style="margin-left:3%; margin-top: 2%;">
+        <span class="IconTitle" style="background-color:#e066ff">
+            <span class="glyphicon glyphicon-book" aria-hidden="true" style="margin-left:26px; margin-top: 23px; color:#FFF;"></span>
+        </span>
+        <h4 style="margin-left: 12%; margin-top: -6%;">Experience</h4>
+
+    </div>
+    <div class="panel-body">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var work in Model)
+            {
+                <div class="box">
+                    <div class="details">
+
+                        <p style="margin-left: 4%; ">
+                            <b> @string.Format("{0} : {1}", work.Company, work.Title) </b>
+
+                            <span class="yearStyle " style=" background-color: #e066ff;">@string.Format("{0: yyyy} - {1: yyyy}", work.FromYear, work.ToYear)</span>
+                            @*<a href="@Url.Action("ExpDelete","myCV")" class="pull-right"><span class="glyphicon glyphicon-remove"></span> Supprimer</a>  |  <a href="@Url.Action("ExpUpdate","myCV")" class="pull-right" style="margin-right:5px;"><span class="glyphicon glyphicon-edit"></span> modifier</a>*@
+
+                            <br />
+                            <span> <i>@work.Country</i></span>
+                        <p class="description">
+                            @work.Description
+                        </p>
+
+                    </div> <!--END DETAILS-->
+                </div> <!--END BOX-->
+            }
+        }
+
+    </div> <!-- END PANEL BODY -->
+</div>

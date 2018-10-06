@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Continue As";
+    Layout = "~/Views/Shared/ContinueAsLayout.cshtml";
+
+}
+
+<h2>Continuer en role : </h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-4">
+            @Html.DropDownList("roles", null, htmlAttributes: new { @class = "form-control control-label" })
+        </div>
+        <div class="col-md-4">
+            <input type="submit" value="Continue" class="btn btn-info" />
+        </div>
+    </div>
+</div>
+}

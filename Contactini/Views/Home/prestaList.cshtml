@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Contactini.Models.PrestaViewModel>
+@using Contactini.Models
+@{
+    ViewBag.Title = "prestaList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="well text-center">Nos Prestataires</h2>
+
+
+
+
+
+
+@foreach (var item in Model)
+{
+    <div class="col-md-4">
+        <div class="card text-center">
+            @*<div class="card-header" style="background-color:@(item.State == Status.Open ? "dodgerblue":"grey")">*@
+            <div class="card-header" style="background-color:grey">
+                <h5 style="color:white;">
+                    Secteur : @Html.DisplayFor(modelItem => item.sector) | Domaine : @Html.DisplayFor(modelItem => item.domain)
+                </h5>
+            </div>
+            <div class="card-body" align="center">
+                @*<div>
+                    <h5 class="card-title well well-sm" style="width:50%;color:white; background-color:dodgerblue;">@Html.DisplayFor(modelItem => item.dispo)</h5>
+                </div>*@
+                <a class="card-title well well-sm btn btn-primary" style="width:50%;color:white; background-color:dodgerblue;" data-target="#myModal1" data-toggle="modal" onclick="Connect()"><span class="glyphicon glyphicon-screenshot"></span>Détails</a>
+
+                <div class="row">
+
+                    <div>@Html.Image(@Url.Content(item.photoLink), "Profile photo", "190", "250")</div>
+
+
+                </div>
+
+            </div>
+            <div class="card-footer text-muted">
+                <div class="row center-block">
+                    @item.fullName
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="modal" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Notification de Connexion </h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Fermer</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+     function Connect() {
+        $.get("@Url.Action("Connect","Home")/" ,
+            function (data) { $('.modal-body').html(data); })
+    }
+</script>

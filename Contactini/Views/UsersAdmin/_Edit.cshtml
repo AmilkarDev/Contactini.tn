@@ -1,0 +1,136 @@
+﻿@model IdentitySample.Models.EditUserViewModel
+
+@{
+    ViewBag.Title = "_Edit";
+    Layout = "~/Views/Shared/ReceptionLayout.cshtml";
+}
+<style>
+    .cent {
+        background-color: white;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+    }
+</style>
+<h4 class="well text-center">Mise a Jour du Profil</h4>
+<hr />
+<div class="form-horizontal" align="center">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        <div class="row" align="center">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.Label("Nom et Prénom", htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Nom d'utilistateur", htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Email", htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Numéro de téléphone", htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Rue", htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.StreetAddress, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.StreetAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.Label("Cité", htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Governorat", htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Code Postale", htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Pays", htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Change Photo", htmlAttributes: new { @class = "control-label" })
+                    <div>
+                        <button type="button" class="btn btn-default" data-target="#myModal" data-dismiss="modal" data-toggle="modal">
+                            Changer photo de profil
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="form-group">
+            <div hidden="hidden">
+                @Html.TextBoxFor(model => model.PhotoLink, new { @class = "form-control", @Id = "Im", placeholder = Html.DisplayNameFor(n => n.PhotoLink) })
+            </div>
+        </div>
+        <div class="row" align="center">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.Label("Accés Prestataire", htmlAttributes: new { @class = "control-label" })@*, @style = "color :white"*@
+                    @Html.CheckBoxFor(x => x.isServiceProvider, new { htmlAttributes = new { @class = "form-control col-md-6" } })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+
+                        <button type="submit"  class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span>
+                            Enregistrer
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="modal" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Photo Upload</h4>
+            </div>
+            <div class="modal-body">
+                @{ Html.RenderAction("AddPhoto", "Account");}
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div>
+    <a href="@Url.Action("Index","myCV")" class="btn btn-primary pull-right" style="margin-top:-6%;margin-right:5px;">
+        <span class="glyphicon glyphicon-plus"></span>Nouveau
+    </a>
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

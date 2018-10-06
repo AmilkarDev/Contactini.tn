@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Contactini.Models.Entities.Certification>
+@using Contactini.Models
+@{
+    Layout = "";
+}
+<div class="panel panel-default">
+    <div style="margin-left:3%; margin-top: 2%;">
+        <span class="IconTitle" style="background-color:#f0ad4e">
+            <span class="glyphicon glyphicon-file" aria-hidden="true" style="margin-left:26px; margin-top: 23px; color:#FFF;"></span>
+        </span>
+        <h4 style="margin-left: 12%; margin-top: -6%;">Certifications</h4>
+
+    </div>
+    <div class="panel-body">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var certification in Model)
+            {
+                <div class="card text-center col-md-4">
+                    <div class="card-header" style="background-color:grey; color:white;">
+                        @string.Format("{0: dd/MM/yyyy}", certification.FromYear)
+                    </div>
+                    <div class="card-body" align="center">
+                        <div>
+                            <h5 class="card-title well well-sm" style="width:50%; background-color:dodgerblue; color:white;">@certification.CertificationName</h5>
+                        </div>
+                        <p class="card-text"> @CertificationAuthority(certification.CertificationAuthority)</p>
+
+                    </div>
+                    <div class="card-footer text-muted">
+                        @certification.Level
+                    </div>
+                </div>
+
+
+
+
+
+
+
+            }
+        }
+
+
+    </div> <!-- END PANEL BODY -->
+</div>
+@helper CertificationAuthority(string authortiy)
+{
+
+    switch (authortiy.ToLower())
+    {
+        case "microsoft":
+            @Html.Image(@Url.Content("~/Content/Images/mic.png"), "mic photo", "85", "85");
+            break;
+
+        case "scrum":
+            @Html.Image(@Url.Content("~/Content/Images/scr.png"), "scrum photo", "85", "85");
+            break;
+
+        case "cisco":
+            @Html.Image(@Url.Content("~/Content/Images/cis.png"), "Cisco photo", "85", "85");
+            break;
+        case "google":
+            @Html.Image(@Url.Content("~/Content/Images/goog.png"), "Google photo", "85", "85");
+            break;
+        default:
+            @Html.Image(@Url.Content("~/Content/Images/cert.png"), "certif photo", "85", "85");
+            break;
+    }
+}

@@ -1,0 +1,174 @@
+﻿
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList<Mission>
+@using Contactini.Models.Entities
+@using Contactini.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/BusinessLayout.cshtml";
+}
+
+<style>
+    .cent {
+        background-color: white;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+    }
+</style>
+<h2 class="alert alert-info text-center">Missions Favorisées</h2>
+<div class="container">
+    @*@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div style="margin-right:10px;">
+
+            <div class="form-horizontal" style="margin-bottom:5px;margin-top:5px;margin-right:5px;margin-left:5px;" align="center">
+                <div class="row">
+                    <div class="col-md-3">
+                        @Html.DropDownList("Sectors", (IEnumerable<SelectListItem>)ViewBag.Sectors, "Choisir un secteur", htmlAttributes: new { @class = "form-control control-label" })
+                    </div>
+
+
+
+                    <div class="col-md-3">
+                        @Html.DropDownList("Domains", (IEnumerable<SelectListItem>)ViewBag.Domains, "Choisir un domaine", htmlAttributes: new { @class = "form-control control-label" })
+                    </div>
+
+                    <div class="col-md-3">
+                        @Html.DropDownList("States", (IEnumerable<SelectListItem>)ViewBag.States, "Choisir une governorat", htmlAttributes: new { @class = "form-control control-label" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <input type="submit" value="Sélection" class="btn btn-default" />
+                        <a href="@Url.Action("Index","Business")" class="btn btn-primary">Annuler</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }*@
+    @if (Model == null)
+    {
+        <p class="alert alert-danger">  @ViewBag.message</p>
+    }
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6">
+            <div class="card text-center">
+                <div class="card-header" style="background-color:@(item.State == Status.Ouverte ? "dodgerblue":"grey")">
+                    <h5 style="color:white;">
+                        Secteur : @Html.DisplayFor(modelItem => item.Sector.Name) | Domaine : @Html.DisplayFor(modelItem => item.Domain.Name)
+                    </h5>
+                </div>
+                <div class="card-body" align="center">
+                    <div>
+                        <h5 class="card-title well well-sm" style="width:50%;color:white; background-color:dodgerblue;">@Html.DisplayFor(modelItem => item.Title)</h5>
+                    </div>
+                    <div style="margin-left:25px; margin-right:25px;">
+                        <table class="table table-bordered">
+                            <tr class="thead-default">
+                                <th class="text-center">Date Publication</th>
+                                <th class="text-center">Date début</th>
+                                <th class="text-center">Durée</th>
+                                <th class="text-center">situation</th>
+                            </tr>
+                            <tr>
+                                <th class="text-center">@Html.DisplayFor(modelItem => item.PublishDate)</th>
+                                <th class="text-center">@Html.DisplayFor(modelItem => item.StartDate)</th>
+                                <th class="text-center">@Html.DisplayFor(modelItem => item.Duration)</th>
+                                <th class="text-center">@Html.DisplayFor(modelItem => item.State)</th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div>@Html.Image(@Url.Content(item.PhotoLink), "Job Offer", "190", "250")</div>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="card-text  pull-left" style="width:250px ;height:180px ;text-overflow:ellipsis; overflow:hidden; margin-bottom:3px;">@Html.DisplayFor(modelItem => item.Description).</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="row center-block">
+                        @*@Html.ActionLink("Appliquer", "Apply", new { id = item.ID }, new { @class = "btn btn-info" })*@
+                        <a href="#" class="btn btn-primary" data-target="#myModal1" data-toggle="modal" id="@item.ID" onclick="Apply(this.id)"><span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span>Postuler</a>
+                        @*<a href="@Url.Action("addToFav","Business")" class="btn btn-primary"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>Enregistrer</a>*@
+                        <a class="btn btn-primary" data-target="#myModal2" data-toggle="modal" id="@item.ID" onclick="contactClient(this.id)"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>Contact</a>
+                        <a href="#" class="btn btn-primary" data-target="#myModal" data-toggle="modal" id="@item.ID" onclick="Details(this.id)"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>Détails</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    <div class="alert alert-info">
+        Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalItemCount Missions
+    </div>
+</div>
+<input type="hidden" id="hiddenMissionId" />
+<div class="modal" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Mission Details</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Fermer</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Nouvelle Candidature</h4>
+            </div>
+            <div class="modal-body contender">
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Fermer</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Contactez le client :</h4>
+            </div>
+            <div class="modal-body contender2">
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Fermer</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function Details(id) {
+        $.get("@Url.Action("Details","Missions")/" + id,
+            function (data) { $('.modal-body').html(data); })
+    }
+     function Apply(id) {
+        $.get("@Url.Action("Apply","Business")/" + id,
+            function (data) { $('.contender').html(data); })
+    }
+    function contactClient(id) {
+        $.get("@Url.Action("contactClient", "Business")/" + id,
+            function (data) { $('.contender2').html(data); })
+    }
+</script>

@@ -1,0 +1,73 @@
+﻿@model Contactini.Models.Entities.Realisation
+
+@{
+    Layout = "";
+    ViewBag.Title = "noteClient";
+}
+<style>
+    .counter {
+        background-color: black;
+        color: white;
+        font-size: 15px;
+        width: 30px;
+        position: absolute;
+        display: inline;
+        margin-top: -10px;
+        float: left;
+        font-weight: bold;
+        top: 50%;
+        right: 240px;
+        margin-left: 10px;
+    }
+</style>
+<div class="card text-center">
+    <div class="card-header" style="background-color:dodgerblue">
+        <p style="color:white"> Mission : @Html.DisplayFor(model => model.Mission.Title)</p>
+    </div>
+    <div class="card-body" align="center">
+        @*<h5 class="card-title">Special title treatment</h5>*@
+        <div>
+            <div id="rateYo"></div>
+            @*<div class="counter"></div>*@
+            <div hidden="hidden">
+                @Html.EditorFor(model => model.Stars, new { htmlAttributes = new { @class = "form-control", @id = "stars" } })
+            </div>
+        </div>
+        <h3 class="card-title">Revue de client</h3>
+        <p class="card-text"> @Html.DisplayFor(model => model.Opinion)</p>
+        @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+    </div>
+    @*<div class="card-footer text-muted">
+            2 days ago
+        </div>*@
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        var rate = $('#stars').val();
+        $(function () {
+
+            $("#rateYo").rateYo({
+                starWidth: "40px",
+                multiColor: true,
+                readOnly: true,
+                precision: 1,
+                maxValue: 5,
+                rating: rate
+            });
+        });
+        
+    });
+
+
+
+    
+    
+</script>
+

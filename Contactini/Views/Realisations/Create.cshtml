@@ -1,0 +1,124 @@
+﻿@model Contactini.Models.Entities.Realisation
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/BusinessLayout.cshtml";
+}
+
+<h2 class="well text-center">Nouvelle Realisation</h2>
+
+
+@using (Html.BeginForm("Create", "Realisations", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4 class="text-center">Realisation du mission Alpha Beta</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.Label("Temps de réalisation", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TakenTime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TakenTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" }, @rows = 10,@cols = 50 })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row" align="center">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="file1">Image1 :</label>
+                        <input type="file" id="Photo1" name="files[0]" accept="image/*" onchange="fileCheck1(this)" />
+                        <img src="~/Content/Images/jobOffer.jpg" id="upIm1" width="250" height="220" style="margin-top:10px;" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="file2">Image2 :</label>
+                        <input type="file" id="Photo2" name="files[1]" accept="image/*" onchange="fileCheck2(this)" />
+                        <img src="~/Content/Images/jobOffer.jpg" id="upIm2" width="250" height="220" style="margin-top:10px;" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="file3">Image3 :</label>
+                        <input type="file" id="Photo3" name="files[2]" accept="image/*" onchange="fileCheck3(this)" />
+                        <img src="~/Content/Images/jobOffer.jpg" id="upIm3" width="250" height="220" style="margin-top:10px;" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="file4">Image4 :</label>
+                        <input type="file" id="Photo4" name="files[3]" accept="image/*" onchange="fileCheck4(this)" />
+                        <img src="~/Content/Images/jobOffer.jpg" id="upIm4" width="250" height="220" style="margin-top:10px;" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <div class="col-md-6" align="center">
+                    <input type="submit" value="Ajouter" class="btn btn-primary" />
+                   </div>
+                <div class="col-md-6" align="center">
+                    <p class="btn btn-default">@Html.ActionLink("Retour", null, null, null, new { href = Request.UrlReferrer })</p>
+                </div>
+            </div>
+            
+    </div>
+}
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    function fileCheck1(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#upIm1').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function fileCheck2(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#upIm2').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function fileCheck3(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#upIm3').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function fileCheck4(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#upIm4').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

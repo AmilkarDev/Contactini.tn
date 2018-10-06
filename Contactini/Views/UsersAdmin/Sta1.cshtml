@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Statistics";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<style>
+    body {
+        background-color: white !important;
+    }
+</style>
+
+<div>
+    <h2 class="well text-center">Statistiques</h2>
+
+    <div id="chartContainer"></div>
+    <div>
+        <a href="@Url.Action("Sta2","UsersAdmin")" class="btn btn-primary"><span class="glyphicon glyphicon-backward"></span>Précédent</a>
+        <a href="@Url.Action("statistics","UsersAdmin")" class="btn btn-primary pull-right">Suivant<span class="glyphicon glyphicon-forward"></span></a>
+    </div>
+    <div id="StatesChartContainer"></div>
+    <div id="PiechartContainer"></div>
+</div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+    var result = @Html.Raw(ViewBag.lista);
+	var dataPoints =[];
+	for(var i = 0; i < result.length; i++){
+        dataPoints.push({ label: result[i].stateName, legendText: result[i].stateName, y: result[i].MissionsCount});
+    }
+  
+
+    
+      
+
+         window.onload = function () {
+            var chart2 = new CanvasJS.Chart("StatesChartContainer", {
+                title: {
+                    text: "Offre Par Governorat"
+                },
+                animationEnabled: true,
+                legend: {
+                    fontSize: 20,
+                    fontFamily: "Helvetica"
+                },
+                theme: "theme2",
+                data: [
+                {
+                    type: "doughnut",
+                    indexLabelFontFamily: "Garamond",
+                    indexLabelFontSize: 20,
+                    indexLabel: "{label} {y}%",
+                    startAngle: -20,
+                    showInLegend: true,
+                    toolTipContent: "{legendText} {y}%",
+                  
+                    dataPoints: dataPoints
+
+                }
+                ]
+            });
+        chart2.render();
+        };
+</script>

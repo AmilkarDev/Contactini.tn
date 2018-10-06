@@ -1,0 +1,57 @@
+﻿@model IdentitySample.Models.ApplicationRole
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2 class="well text-center">Details du Role</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Nom du Role")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+<h4 class="well text-center">Les utilisateurs dans ce role</h4>
+@if (ViewBag.UserCount == 0)
+{
+    <hr />
+    <p>Aucun utilisateur dans ce role.</p>
+}
+
+<table class="table">
+
+    @foreach (var item in ViewBag.Users)
+    {
+    <tr>
+        <td>
+            @item.UserName
+        </td>
+        <td>
+            @item.Email
+        </td>
+    </tr>
+    }
+</table>
+<div align="center">
+    <a href="@Url.Action("Edit","RolesAdmin", new { id = Model.Id })" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Modifier </a>
+    <a href="@Url.Action("Index","RolesAdmin")" class="btn btn-primary"><span class="glyphicon glyphicon-backward"></span> Retour </a>
+
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")*@
+</div>
+
+
+

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Contactini.Models.Entities.Language>
+@using Contactini.Models
+@{
+    Layout = "";
+}
+<div class="panel panel-default">
+    <div style="margin-left:3%; margin-top: 2%;">
+        <span class="IconTitle" style="background-color:#d9534f">
+            <span class="glyphicon glyphicon-list" aria-hidden="true" style="margin-left:26px; margin-top: 23px; color:#FFF;"></span>
+        </span>
+        <h4 style="margin-left: 12%; margin-top: -6%;">Langues</h4>
+
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            @if (Model != null && Model.Any())
+            {
+                foreach (var language in Model)
+                {
+                    <div class=" col-md-3">
+                        <div class="card text-center">
+                            <div class="card-header" style="background-color:grey;color:white;">
+                                @language.LanguageName
+                            </div>
+                            <div class="card-body">
+
+                                @LanguageImage(language.LanguageName)
+
+                            </div>
+                            <div class="card-footer text-muted">
+                                @language.LangProficiency
+                            </div>
+                        </div>
+                        @*@LanguageImage(language.LanguageName)
+                            @language.LanguageName
+                            @language.LangProficiency*@
+
+                        @*<div style="margin-left: 11%; margin-top: -9%;">
+                                <p style="margin-left: 4%; font-weight:bold;">
+                                    @language.LanguageName
+                                </p>
+                                <span style="margin-left: 27px;"> <i>@language.LangProficiency</i></span>
+
+                            </div>*@
+                    </div>
+                }
+            }
+        </div>
+    </div> <!-- END PANEL BODY -->
+</div>
+
+@helper LanguageImage(string languageName)
+{
+    switch (languageName.ToLower())
+    {
+        case "Arabic":
+            @Html.Image(@Url.Content("~/Content/Images/arab.png"), "mic photo", "85", "85");
+            break;
+
+        case "french":
+            @Html.Image(@Url.Content("~/Content/Images/french.jpg"), "mic photo", "85", "85");
+
+            break;
+
+        case "english":
+            @Html.Image(@Url.Content("~/Content/Images/english.jpg"), "mic photo", "85", "85");
+
+            break;
+
+        case "german":
+            @Html.Image(@Url.Content("~/Content/Images/german.png"), "mic photo", "85", "85");
+            break;
+        case "italian":
+            @Html.Image(@Url.Content("~/Content/Images/ital.jpg"), "mic photo", "85", "85");
+            break;
+        default:
+            @Html.Image(@Url.Content("~/Content/Images/lang.jpg"), "mic photo", "85", "85");
+            break;
+    }
+}

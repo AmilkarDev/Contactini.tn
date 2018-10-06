@@ -1,0 +1,60 @@
+﻿
+
+
+@{
+    ViewBag.Title = "Statistics";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<style>
+    body {
+        background-color: white !important;
+    }
+</style>
+
+<div>
+    <h2 class="well text-center">Statistiques</h2>
+    <div>
+        <a href="@Url.Action("Statistics","UsersAdmin")" class="btn btn-primary"><span class="glyphicon glyphicon-backward"></span>Précédent</a>
+        <a href="@Url.Action("sta1","UsersAdmin")" class="btn btn-primary pull-right">Suivant<span class="glyphicon glyphicon-forward"></span></a>
+    </div>
+    <div id="PiechartContainer"></div>
+</div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+
+    var result1 = @Html.Raw(ViewBag.list);
+	var data =[];
+	for(var i = 0; i < result1.length; i++){
+        data.push({ label: result1[i].domainName, legendText:result1[i].domainName, y: result1[i].MissionsCount});
+    }
+
+    window.onload = function () {
+        var chart3 = new CanvasJS.Chart("PiechartContainer", {
+            title: {
+                text: "Offres par Domaines"
+            },
+            animationEnabled: true,
+            legend: {
+                verticalAlign: "center",
+                horizontalAlign: "left",
+                fontSize: 20,
+                fontFamily: "Helvetica"
+            },
+            theme: "theme2",
+            data: [
+                {
+                    type: "pie",
+                    indexLabelFontFamily: "Garamond",
+                    indexLabelFontSize: 20,
+                    indexLabel: "{label} {y}%",
+                    startAngle: -20,
+                    showInLegend: true,
+                    toolTipContent: "{legendText} {y}%",
+                    dataPoints:data
+                }
+            ]
+        });
+
+        chart3.render();
+        };
+</script>

@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "Statistics";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<style>
+    body{
+        background-color:white !important;
+    }
+</style>
+
+<div>
+    <h2 class="well text-center">Statistiques</h2>
+    <div class="row">
+        <a href="@Url.Action("sta1","UsersAdmin")" class="btn btn-primary"><span class="glyphicon glyphicon-backward"></span>Précédant</a>
+        <a href="@Url.Action("sta2","UsersAdmin")" class="btn btn-primary pull-right">Suivant<span class="glyphicon glyphicon-forward"></span></a>
+    </div>
+    <div id="chartContainer"></div>
+
+</div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+   
+    var result1 = @Html.Raw(ViewBag.list);
+	var data =[];
+	for(var i = 0; i < result1.length; i++){
+        data.push({ label: result1[i].prestaName, y: result1[i].MissionsCount});
+    }
+
+    window.onload = function () {
+        var chart1 = new CanvasJS.Chart("chartContainer", {
+            theme: "theme2",
+            animationEnabled: true,
+            title: {
+                text: "Meilleurs Prestataires de ce mois "
+            },
+            //subtitles: [
+            //    { text: "Try Resizing the Browser" }
+            //],
+            data: [
+                {
+                    type: "column", //change type to bar, line, area, pie, etc
+                    dataPoints: data
+                }
+            ]
+        });
+        chart1.render();
+  //  };
+
+   // window.onload = function () {
+        //    var chart2 = new CanvasJS.Chart("StatesChartContainer", {
+        //        title: {
+        //            text: "Offre Par Governorat"
+        //        },
+        //        animationEnabled: true,
+        //        legend: {
+        //            fontSize: 20,
+        //            fontFamily: "Helvetica"
+        //        },
+        //        theme: "theme2",
+        //        data: [
+        //        {
+        //            type: "doughnut",
+        //            indexLabelFontFamily: "Garamond",
+        //            indexLabelFontSize: 20,
+        //            indexLabel: "{label} {y}%",
+        //            startAngle: -20,
+        //            showInLegend: true,
+        //            toolTipContent: "{legendText} {y}%",
+        //            //dataPoints: [
+        //            //    { y: 72.48, legendText: "Sousse", label: "Sousse" },
+        //            //    { y: 10.39, legendText: "Monastir", label: "Monastir" },
+        //            //    { y: 7.78, legendText: "Tunis!", label: "Tunis" },
+        //            //    { y: 7.14, legendText: "Kairouan", label: "Kairouan" },
+        //            //    { y: 0.22, legendText: "Kasserine", label: "Kasserine" },
+        //            //    { y: 0.15, legendText: "Mannouba", label: "Mannouba" },
+        //            //    { y: 1.84, legendText: "Ben Arous", label: "Ben Arous" }
+        //            //],
+        //                dataPoints: dataPoints
+                   
+        //        }
+        //        ]
+        //    });
+        //chart2.render();
+
+
+
+
+        //var chart3 = new CanvasJS.Chart("PiechartContainer", {
+        //    title: {
+        //        text: "Offres par Domaines"
+        //    },
+        //    animationEnabled: true,
+        //    legend: {
+        //        verticalAlign: "center",
+        //        horizontalAlign: "left",
+        //        fontSize: 20,
+        //        fontFamily: "Helvetica"
+        //    },
+        //    theme: "theme2",
+        //    data: [
+        //        {
+        //            type: "pie",
+        //            indexLabelFontFamily: "Garamond",
+        //            indexLabelFontSize: 20,
+        //            indexLabel: "{label} {y}%",
+        //            startAngle: -20,
+        //            showInLegend: true,
+        //            toolTipContent: "{legendText} {y}%",
+        //            dataPoints: [
+        //                { y: 72.48, legendText: "Technologie", label: "Technologie" },
+        //                { y: 10.39, legendText: "Médecine", label: "Médecine" },
+        //                { y: 7.78, legendText: "Construction", label: "Construction!" },
+        //                { y: 7.14, legendText: "Tourisme", label: "Tourisme" },
+        //                { y: 0.22, legendText: "Agriculture", label: "Agriculture" },
+        //                { y: 0.15, legendText: "Paramédicale", label: "Paramédicale" },
+        //                { y: 1.84, legendText: "Autres", label: "Autres" }
+        //            ]
+        //        }
+        //    ]
+        //});
+
+      //  chart3.render();
+        };
+</script>

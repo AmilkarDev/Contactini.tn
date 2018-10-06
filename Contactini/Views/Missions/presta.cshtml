@@ -1,0 +1,137 @@
+﻿@model IEnumerable<Contactini.Models.Entities.ServiceProvider>
+@using Contactini.Models
+@{
+    ViewBag.Title = "prestaList";
+    Layout = "~/Views/Shared/ReceptionLayout.cshtml";
+}
+<style>
+    .cent {
+        background-color: white;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+    }
+</style>
+<h2 class="well text-center">Nos Prestataires</h2>
+
+
+
+
+
+
+@foreach (var item in Model)
+{
+    <div class="col-md-4">
+        <div class="card text-center">
+            @*<div class="card-header" style="background-color:@(item.State == Status.Open ? "dodgerblue":"grey")">*@
+            <div class="card-header" style="background-color:grey">
+                <h5 style="color:white;">
+                    Secteur : @Html.DisplayFor(modelItem => item.sector.Name) | Domaine : @Html.DisplayFor(modelItem => item.Domain.Name)
+                </h5>
+            </div>
+            <div class="card-body" align="center">
+                <div>
+                    <div class="card-title well well-sm" style="width:50%;color:white; background-color:dodgerblue;">
+                        <a style="color:white;" href="@Url.Action("Findex","myCV",new { email = item.Email })" target="_blank">
+                            Consulter mon cv
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div>@Html.Image(@Url.Content(item.photoLink), "Profile photo", "190", "250")</div>
+                    <div class="row" align="center">
+                        <p class="text-center" style="font-size:15px; font-style:oblique"> @item.FullName:@item.Titre</p>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="card-footer text-muted">
+                <div class="row center-block">
+
+                    <a class="btn btn-primary" data-target="#myModal" data-toggle="modal" id="@item.ID" onclick="AddFav(this.id)"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>Enregistrer</a>
+                    <a class="btn btn-primary" data-target="#myModal2" data-toggle="modal" id="@item.ID" onclick="ContactPresta(this.id)"><span class="glyphicon glyphicon-envelope"></span>Contact</a>
+                    <a href="#" class="btn btn-primary" data-target="#myModal4" data-toggle="modal" id="@item.ID" onclick="Details(this.id)"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>Détails</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+    <div class="modal" id="myModal2" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h4>Contacter Le Prestataire :</h4>
+                </div>
+                <div class="modal-body contender2">
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">Annuler</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h4>Mission Enregistré</h4>
+                </div>
+                <div class="modal-body contender1">
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">Fermer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="myModal3" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h4>Envoi du Message</h4>
+                </div>
+                <div class="modal-body contender2">
+
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="myModal4" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h4>Détail du Prestataire</h4>
+                </div>
+                <div class="modal-body contender3">
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">Fermer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    function AddFav(id) {
+        $.get("@Url.Action("addToFav", "Missions")/" + id,
+            function (data) { $('.contender1').html(data); })
+    }
+    function ContactPresta(id) {
+        $.get("@Url.Action("contactPresta","Missions")/" + id,
+            function (data) { $('.contender2').html(data); })
+    }
+      function Details(id) {
+        $.get("@Url.Action("DetailsPresta","Missions")/" + id,
+            function (data) { $('.contender3').html(data); })
+    }
+</script>

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Contactini.Models.Entities.Skill>
+@{
+    Layout = "";
+}
+<div class="panel panel-default">
+    <div style="margin-left:3%; margin-top: 2%;">
+        <span class="IconTitle" style="background-color:#2e6da4">
+            <span class="glyphicon glyphicon-tag" aria-hidden="true" style="margin-left:26px; margin-top: 23px; color:#FFF;"></span>
+        </span>
+        <h4 style="margin-left: 12%; margin-top: -6%;">Compétences</h4>
+        <a href="@Url.Action("SkiCreate","myCV")" class="btn btn-primary pull-right" style="margin-top:-6%;margin-right:5px;">
+            <span class="glyphicon glyphicon-plus"></span>Nouveau
+        </a>
+    </div>
+    <div class="panel-body">
+        <div class="">
+            <table class="table table-hover" style="font-size: 13px;">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Compétence</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int count = 1;
+                    }
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var skill in Model)
+                        {
+                            <tr>
+                                <td> @count </td>
+                                <td>@skill.SkillName</td>
+                                <td>
+                                    <a href="@Url.Action("SkiDelete","myCV", new {id = skill.ID })" class="pull-right"><span class="glyphicon glyphicon-remove"></span> Supprimer</a>  |  <a href="@Url.Action("SkiUpdate","myCV", new {id = skill.ID })" class="pull-right" style="margin-right:5px;"><span class="glyphicon glyphicon-edit"></span> modifier</a>
+
+                                </td>
+                            </tr>
+                            count++;
+                        }
+                    }
+                </tbody>
+
+            </table>
+        </div> <!--END BOX-->
+    </div> <!-- END PANEL BODY -->
+</div>

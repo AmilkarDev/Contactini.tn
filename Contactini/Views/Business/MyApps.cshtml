@@ -1,0 +1,143 @@
+﻿@model IEnumerable<Contactini.Models.Entities.Candidature>
+
+@{
+    ViewBag.Title = "MyApps";
+    Layout = "~/Views/Shared/BusinessLayout.cshtml";
+    string str = "";
+}
+
+<style>
+    .cent {
+        background-color: white;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+    }
+</style>
+<h2 class="well text-center">Mes Candidatures</h2>
+<div class="container">
+
+    @foreach (var item in Model)
+    {
+        switch (item.State.ToString())
+        {
+            case "Acceptée":
+                str = "green";
+                break;
+            case "En_Attente":
+                str = "dodgerblue";
+                break;
+            case "Rejetée":
+                str = "Grey";
+                break;
+        }
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-header" style="background-color:@str">
+                    <h5 style="color:white;">
+                        @Html.DisplayFor(modelItem => item.Mission.Title)
+                    </h5>
+                </div>
+                <div class="card-body" align="center">
+                    <div>
+                        <h5 class="card-title well well-sm" style="width:50%;color:white; background-color:dodgerblue;">@Html.DisplayFor(modelItem => item.Title)</h5>
+                    </div>
+                    <p style="height:200px; text-overflow:ellipsis ;overflow:hidden; margin-left:2px;margin-right:2px;">@Html.DisplayFor(modelItem => item.Texte)</p>
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="row center-block">
+                        <button type="button" class="btn btn-primary" data-target="#myModal1" data-toggle="modal" onclick="confirmDelete(@item.ID)">
+                            <span class=" glyphicon glyphicon-trash"></span>
+                            Supprimer
+                        </button>
+                        <a class="btn btn-primary" data-target="#myModal2" data-toggle="modal" id="@item.ID" onclick="state(this.id)"><span class="glyphicon glyphicon-tag"></span> Situation</a>
+                        <a class="btn btn-primary" data-target="#myModal" data-toggle="modal" id="@item.ID" onclick="Details(this.id)">
+                            <span class=" glyphicon glyphicon-plus"></span>
+                            Détails
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+<div class="modal" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Etat du Candidature</h4>
+            </div>
+            <div class="modal-body container1">
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Supprimer une candidature</h4>
+            </div>
+            <div class="modal-body">
+                Confirmer la suppression du candidature
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Annuler</a>
+                <a href="#" class="btn btn-default" onclick="DeleteMission()">Supprimer</a>
+                @*<input type="reset" value="Delete" class="btn-success" id="btnSubmit" />*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Détails du Candidature</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="hiddenAppId" />
+<script>
+     function Details(id) {
+        $.get("@Url.Action("App_Details","Missions")/" + id,
+            function (data) { $('.modal-body').html(data); })
+    }
+     var confirmDelete = function (ID) {
+        $("#hiddenAppId").val(ID);
+    }
+   function state(id) {
+        $.get("@Url.Action("state","Business")/" + id,
+            function (data) { $('.container1').html(data); })
+    }
+    var DeleteMission = function () {
+        var Id = $("#hiddenAppId").val();
+
+        $.ajax({
+
+            type: "POST",
+            url: '/Business/DeleteApp',
+            data: { ID: Id },
+            success: function (result) {
+                $("#myModal1").modal("hide");
+                location.reload();
+            }
+
+        })
+
+    }
+
+</script>

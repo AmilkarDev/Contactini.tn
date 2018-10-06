@@ -1,0 +1,163 @@
+﻿@model Contactini.Models.Entities.ServiceProvider
+@using Contactini.Models
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/BusinessLayout.cshtml";
+    string src = @ViewBag.photoLink;
+    if (src == null) src = "~/Content/Images/Unknown.png";
+    string str1 = "aucune domaine"; string str2 = "aucun secteur";
+    if(Model.Domain != null)
+        str1 = Model.Domain.Name;
+    if (Model.sector != null)
+        str2 = Model.sector.Name;
+}
+<style type="text/css">
+   
+    .socialMedia {
+        padding-left: 16%;
+    }
+
+    .panel-default {
+        width: 65%;
+        margin-left: 18%;
+        margin-top: 3%;
+    }
+
+    .IconTitle {
+        border: 3px solid #e0e0e0;
+        display: inline-block;
+        width: 70px;
+        height: 70px;
+        border-radius: 100%;
+    }
+
+    .yearStyle {
+        
+        
+        font-size: 13px;
+        color: #FFF;
+        padding: 5px;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .box {
+        border: 1px solid #d0cfcf;
+        padding: 16px 0px;
+        border-radius: 11px;
+        margin-top: 15px;
+    }
+
+    .description {
+        padding: 9px 48px;
+        font-size: 13px;
+        color: #797575;
+        font-style: italic;
+    }
+</style>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div id="Profil">
+            <img src=@Url.Content(src) alt="" class="img-circle" style="width: 125px; height: 142px; border: 3px solid #c1c1c1;" />
+            <h4 style="display: inline-block; margin-left: 20px;">@string.Format("{0}", Model.FullName)</h4>
+
+            <a href="@Url.Action("UpdatePersInfo","myCV")" class="btn btn-primary pull-right">
+                <span class="glyphicon glyphicon-edit"></span>Mise a jour
+            </a> 
+            <a href="@Url.Action("PrintCV","myCV")" target="_blank" class="btn btn-primary pull-right" style="margin-right:3px;">
+                <span class="glyphicon glyphicon-print"></span>Imprimer
+            </a>
+        </div>
+        <div id="container">
+            <div class="row" style="margin-top: 22px;">
+                <div class="col-xs-6">
+                    <p>
+                        <b> Date de naissance : </b> <span>@string.Format("{0: dd/MM/yyyy}", @Model.DateOfBirth)</span>
+                    </p>
+                </div>
+                <div class="col-xs-6">
+                    <p>
+                        <b>Téléphone :</b> <span>@Model.PhoneNum</span>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <p>
+                        <b>Nationalité :</b> <span>@Model.Address.Country</span>
+                    </p>
+                </div>
+                <div class="col-xs-6">
+                    <p>
+                        <b>Email :</b> <span>@Model.Email</span>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-xs-6">
+                    <p>
+                        <b>Niveau educationnel :</b> <span>@Model.EducationalLevel</span>
+                    </p>
+                </div>
+                <div class="col-xs-6">
+                    <p>
+                        <b>Addresse : </b> <span>@Model.Address.DisplayAddress</span>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                
+   
+             
+            </div>
+        </div>
+        <div class="socialMedia" style="margin-left: 30%;">
+            <a href="@Model.FacebookProfil" class="btn btn-primary"> <i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook</a>
+            <a href="@Model.LinkedInProfil" class="btn btn-success"><i class="fa fa-linkedin-square" aria-hidden="true"></i> LinkedIN</a>
+            <a href="@Model.TwitterProfil" class="btn btn-info"><i class="fa fa-twitter-square" aria-hidden="true"></i> Twitter</a>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div style="margin-left:3%; margin-top: 2%;">
+        <span class="IconTitle" style="background-color:#a9a9a9">
+            <span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-left:26px; margin-top: 23px; color:#FFF;"></span>
+
+        </span>
+
+        <h4 style="margin-left: 12%; margin-top: -6%;">@Model.Titre</h4>
+        <a href="@Url.Action("DescUpdate","myCV")" class="btn btn-primary pull-right" style="margin-top:-6%;margin-right:5px;">
+            <span class="glyphicon glyphicon-plus"></span>Mise à Jour
+        </a>
+    </div>
+    <div class="panel-body">
+
+        <p class="description">
+            @Model.Description
+        </p>
+        <div class="row">
+            <div class="col-md-6" align="center">
+                <span class="badge badge-danger">Secteur : </span>
+                <span class="yearStyle" style="margin-bottom:2px; background-color: #5cb85c;"> <i class="fa fa-bookmark-o"></i> @str2 </span>
+            </div>
+            <div class="col-md-6"  align="center">
+                <span class="badge badge-danger">Domaine : </span>
+                <span class="yearStyle" style=" background-color: #5cb85c;">  <i class="fa fa-bookmark-o"></i> @str1 </span>
+            </div>
+        </div>
+        
+    </div> <!-- END PANEL BODY -->
+</div>
+
+@{ Html.RenderAction("Education", "myCV");}
+
+@{ Html.RenderAction("Experience", "myCV");}
+
+@{ Html.RenderAction("Skills", "myCV");}
+@{ Html.RenderAction("Certificates", "myCV");}
+@{ Html.RenderAction("Langues", "myCV");}
+
+

@@ -1,0 +1,25 @@
+﻿@model Contactini.Models.Entities.Domain
+@{ 
+    Layout = "";
+}
+<h4>Sure de supprimer cette domaine ?</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Nom du secteur")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-default" /> 
+         
+        </div>
+    }
+</div>

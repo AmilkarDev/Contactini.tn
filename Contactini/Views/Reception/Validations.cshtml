@@ -1,0 +1,130 @@
+﻿@model IEnumerable<Contactini.Models.Entities.Realisation>
+
+@{
+    ViewBag.Title = "Validations";
+    Layout = "~/Views/Shared/ReceptionLayout.cshtml";
+}
+
+<h2 class="well text-center">Réalisations à valider</h2>
+
+@foreach (var item in Model)
+{
+    <div class="card text-center">
+        <div class="card-header" style="background-color:@(item.Validation  ? "dodgerblue":"grey")">
+            Mission : @Html.DisplayFor(modelItem => item.Mission.Title)
+        </div>
+        <div class="card-body" align="center">
+            <h5 class="card-title well well-sm" style="width:50%;color:white; background-color:dodgerblue;">Temps de réalisation : @Html.DisplayFor(modelItem => item.TakenTime)</h5>
+            <p class="card-text">@Html.DisplayFor(modelItem => item.Description).</p>
+
+            <div class="row" align="center">
+                @*<h4 class="alert alert-info text-center" style="margin-left:55px;margin-right:55px;">Photos de réalisation du mission</h4>*@
+                @if (item.Photos.ToList() != null)
+                {
+                    var bla = item.Photos.ToList();
+                    for (int i = 0; i < bla.Count(); i++)
+                    {
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <img src="@Url.Content(String.Format("{0}",bla[i].Link))" id="upIm1" width="250" height="220" class="img1" style="margin-top:10px;" />
+                            </div>
+                        </div>
+                    }
+                }
+
+
+            </div>
+
+        </div>
+        <div class="card-footer text-muted">
+            <div class="row center-block">
+                <a class="btn btn-primary" data-target="#myModal1" data-toggle="modal" id="@item.ID" onclick="Validate(this.id)"><span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span>Valider</a>
+                @*<a class="btn btn-primary" data-target="#myModal2" data-toggle="modal" id="@item.ID" onclick="Contactclient(this.id)"><span class="glyphicon glyphicon-envelope"></span>Contact</a>
+                <a class="btn btn-primary" data-target="#myModal" data-toggle="modal" id="@item.ID" onclick="Details(this.id)"><span class="glyphicon glyphicon-sunglasses"></span>Détails</a>*@
+            </div>
+        </div>
+    </div>
+}
+<div class="modal" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Valider la réalisation</h4>
+            </div>
+            <div class="modal-body contender1">
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Fermer</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Notes du client </h4>
+            </div>
+            <div class="modal-body contender">
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Fermer</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+
+
+     function Details(id) {
+            $.get("@Url.Action("noteClient","Reception")/" + id,
+                function (data) {
+                    $('.contender').html(data);
+                });
+
+    }
+
+
+
+
+
+     function Validate(id) {
+            $.get("@Url.Action("Validate","Reception")/" + id,
+                function (data) {
+                    $('.contender1').html(data);
+                });
+        }
+
+        $(function () {
+            $("#btnValidate").click(function () {
+                var realisation = new Object();
+                //realisation.Stars = $('#stars').val();
+                realisation.Stars = $rateYo.rateYo("rating");
+                realisation.Opinion = $('#opinion').val();
+                if (realisation != null) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Reception/Validate",
+                        data: JSON.stringify(realisation),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            $('#myModal1').hide();
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                }
+            });
+        });
+</script>

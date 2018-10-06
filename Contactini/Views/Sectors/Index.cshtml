@@ -1,0 +1,215 @@
+﻿@model Contactini.Models.Entities.SectorViewModel
+@using Contactini.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2 class="well text-center">Secteurs et domaines</h2>
+<p align="center">
+    @*@Html.ActionLink("Nouveau secteur", "Create", null, new { @class = "btn btn-primary glyphicon glyphicon-plus" })*@
+    @*@Html.ActionLink("Mes Missions", "MyMissions", null, new { @class = "btn btn-primary glyphicon glyphicon-plus" })*@
+    <button type="button" class="btn btn-primary" data-target="#myModal1" data-toggle="modal">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Nouveau secteur
+    </button>
+</p>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <table class="table table-bordered" align="center">
+            <tr>
+                <th>
+                    Sector Name
+                </th>
+                <th>
+                    Operations
+                </th>
+            </tr>
+
+            @foreach (var item in Model.sectors)
+            {
+                string selectedRow = "";
+
+                if (item.ID == ViewBag.sectorId)
+                {
+                    selectedRow = "selectedrow";
+                }
+                <tr class="@selectedRow" valign="top">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Domaines", "Index", new { id = item.ID }, new { @class = "btn btn-primary" }) |
+                        <a class="btn btn-primary" data-target="#myModal2" data-toggle="modal" id="@item.ID" onclick="Edit(this.id)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Modifier</a>
+                        |
+                        <a class="btn btn-primary" data-target="#myModal3" data-toggle="modal" id="@item.ID" onclick="Delete(this.id)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer</a>
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+<div  class="col-md-3"></div>
+</div>
+
+<div class="row">
+    @if (Model.domains != null)
+    {
+        <div align="center">
+            <h3 class="well text-center">Domaine du secteur sélectionné</h3>
+            <button type="button"  class="btn btn-info glyphicon glyphicon-plus" data-target="#myModal" data-toggle="modal" style="margin-bottom:10px;">Nouveau Domaine</button>
+        </div>
+        foreach (var item in Model.domains)
+        {
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-header" style="background-color:dimgrey">
+                        <h5 style="color:white;">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </h5>
+                    </div>
+
+                    <div class="card-body" align="center">
+                        <div>
+                            <h5 class="card-title well well-sm" style="width:50%;">@Html.DisplayFor(modelItem => item.MissionCount) Missions</h5>
+                        </div>
+                        @Html.Image(@Url.Content(item.PhotoLink), "Domain Photo", "250", "250")
+                    </div>
+                    <div class="card-footer text-muted">
+                        @Html.ActionLink("Missions", "Missions", new { id = item.domainId }, new { @class = "btn btn-primary" }) |
+                        <a class="btn btn-primary" data-target="#myModal4" data-toggle="modal" id="@item.domainId" onclick="Modif(this.id)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Modifier</a>|
+                        <a class="btn btn-primary" data-target="#myModal5" data-toggle="modal" id="@item.domainId" onclick="Suppr(this.id)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer</a>|
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+   
+<div id="Display">
+
+</div>
+<div class="modal" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Nouveau Domaine</h4>
+            </div>
+            <div class="modal-body">
+                @{ Html.RenderAction("Create", "Domains");}
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Annuler</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Nouveau Secteur</h4>
+            </div>
+            <div class="modal-body">
+                @{ Html.RenderAction("Create", "Sectors");}
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Annuler</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Modifier un secteur</h4>
+            </div>
+            <div class="modal-body container2">
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Annuler</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal3" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Supprimer un secteur</h4>
+            </div>
+            <div class="modal-body container3">
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Annuler</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal4" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Modifier une domaine</h4>
+            </div>
+            <div class="modal-body container4">
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Annuler</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal5" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Supprimer une domaine</h4>
+            </div>
+            <div class="modal-body container5">
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Annuler</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function fileCheck(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#upIm').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+     function Edit(id) {
+        $.get("@Url.Action("Edit","Sectors")/" + id,
+            function (data) { $('.container2').html(data); })
+    }
+    function Modif(id) {
+        $.get("@Url.Action("Edit","Domains")/" + id,
+            function (data) { $('.container4').html(data); })
+    }
+    function Delete(id) {
+        $.get("@Url.Action("Delete","Sectors")/" + id,
+            function (data) { $('.container3').html(data); })
+    }
+     function Suppr(id) {
+        $.get("@Url.Action("Delete","Domains")/" + id,
+            function (data) { $('.container5').html(data); })
+    }
+</script>

@@ -1,0 +1,71 @@
+﻿@model Contactini.Models.Entities.workExperience
+
+@{
+    ViewBag.Title = "ExpUpdate";
+    Layout = "~/Views/Shared/BusinessLayout.cshtml";
+}
+
+<h2 class="well text-center">Mise a jour d'experience</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID)
+    <div class="row" align="center">
+        <div class="form-group col-md-6">
+            @Html.Label("Institution", htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Company, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Company, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.Label("Titre", htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row" align="center">
+        <div class="form-group col-md-6">
+            @Html.Label("de l'année", htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.FromYear, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.FromYear, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-6">
+            @Html.Label("à l'année", htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.ToYear, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ToYear, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row" align="center">
+        <div class="form-group col-md-6">
+            @Html.Label("Pays", htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-6">
+            @Html.Label("Description", htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row" style="margin-top:15px;">
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary  pull-right"><span class="glyphicon glyphicon-edit"></span>Enregistrer</button>
+        </div>
+        <div class="col-md-6">
+            <a href="@Url.Action("Index","myCV")" class="btn btn-primary pull-left"><span class="glyphicon glyphicon-backward"></span>Retour</a>
+        </div>
+    </div>
+</div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

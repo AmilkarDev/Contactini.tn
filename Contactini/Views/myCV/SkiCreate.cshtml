@@ -1,0 +1,69 @@
+﻿@model Contactini.Models.Entities.Skill
+
+@{
+    ViewBag.Title = "SkiCreate";
+    Layout = "~/Views/Shared/BusinessLayout.cshtml";
+}
+<style type="text/css">
+
+    .row {
+        margin-bottom: 25px;
+    }
+
+    .IconTitle {
+        border: 3px solid #e0e0e0;
+        display: inline-block;
+        width: 70px;
+        height: 70px;
+        border-radius: 100%;
+        background-color: #e066ff;
+    }
+</style>
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="Skills FirstLevel" style="margin: 2% auto;">
+    <div style="margin-left:18%;">
+        <span class="IconTitle">
+            <span class="glyphicon glyphicon-tag" aria-hidden="true" style="margin-left:26px; margin-top: 23px; color:#FFF;"></span>
+        </span>
+        <h4 style="margin-left: 8%; margin-top: -4%;">Compétences</h4>
+    </div>
+
+    <div class="panel panel-default" style="width: 65%; margin-left: 18%; margin-top: 3%;">
+        <div class="panel-heading">
+            <h3 class="panel-title"> Nouvelle Compétence</h3>
+        </div> <!-- END PANEL HEADING -->
+        <form>
+            <div class="panel-body">
+                <div class="row">
+                    @Html.Label("Nom", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-xs-10">
+                        @Html.EditorFor(model => model.SkillName, new { htmlAttributes = new { @class = "form-control", @placeholder = "compétence (ex: ASP.NET MVC, jQuery, ...)" } })
+                        @Html.ValidationMessageFor(model => model.SkillName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row" style="margin-top:15px;">
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary  pull-right"><span class="glyphicon glyphicon-edit"></span>Enregistrer</button>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="@Url.Action("Index","myCV")" class="btn btn-primary pull-left"><span class="glyphicon glyphicon-backward"></span>Retour</a>
+                    </div>
+                </div>
+            </div> <!-- END PANEL BODY-->
+
+        </form>
+    </div>
+</div>
+
+        
+    
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

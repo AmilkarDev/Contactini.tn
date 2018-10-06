@@ -1,0 +1,209 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList<Mission>
+@using Contactini.Models.Entities
+@using Contactini.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<style>
+    .cent {
+        background-color: white;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+    }
+</style>
+<h2 class="alert alert-info text-center">Nouveaux Missions</h2>
+<p align="center">
+    @*@Html.ActionLink("Nouvel Offre", "Create", null, new { @class = "btn btn-primary glyphicon glyphicon-plus" })*@
+    @*@Html.ActionLink("Mes Missions", "MyMissions", null, new { @class = "btn btn-primary glyphicon glyphicon-plus" })*@
+</p>
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div style="margin-right:10px;">
+
+            <div class="form-horizontal" style="margin-bottom:5px;margin-top:5px;margin-right:5px;margin-left:5px;" align="center">
+                <div class="row">
+                    <div class="col-md-3">
+                        @Html.DropDownList("Sectors", (IEnumerable<SelectListItem>)ViewBag.Sectors, "Choisir un secteur", htmlAttributes: new { @class = "form-control control-label" })
+                    </div>
+
+
+
+                    <div class="col-md-3">
+                        @Html.DropDownList("Domains", (IEnumerable<SelectListItem>)ViewBag.Domains, "Choisir un domaine", htmlAttributes: new { @class = "form-control control-label" })
+                    </div>
+
+                    <div class="col-md-3">
+                        @Html.DropDownList("States", (IEnumerable<SelectListItem>)ViewBag.States, "Choisir une governorat", htmlAttributes: new { @class = "form-control control-label" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <input type="submit" value="Sélection" class="btn btn-default" />
+                        <a href="@Url.Action("Index","Missions")" class="btn btn-primary">Annuler</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6">
+            <div class="card text-center">
+                <div class="card-header" style="background-color:@(item.State == Status.Ouverte ? "dodgerblue":"grey")">
+                    <h5 style="color:white;">
+                        Secteur : @Html.DisplayFor(modelItem => item.Sector.Name) | Domaine : @Html.DisplayFor(modelItem => item.Domain.Name)
+                    </h5>
+                </div>
+                <div class="card-body" align="center">
+                    <div>
+                        <h5 class="card-title well well-sm" style="width:50%;color:white; background-color:dodgerblue;">@Html.DisplayFor(modelItem => item.Title)</h5>
+                    </div>
+                    <div style=" margin-left:25px; margin-right:25px;">
+                        <table class="table table-bordered">
+                            <tr class="thead-default">
+                                <th class="text-center">Date publication</th>
+                                <th class="text-center">Date début</th>
+                                <th class="text-center">Durée</th>
+                                <th class="text-center">Situation</th>
+                            </tr>
+                            <tr>
+                                <th class="text-center">@Html.DisplayFor(modelItem => item.PublishDate)</th>
+                                <th class="text-center">@Html.DisplayFor(modelItem => item.StartDate)</th>
+                                <th class="text-center">@Html.DisplayFor(modelItem => item.Duration)</th>
+                                <th class="text-center">@Html.DisplayFor(modelItem => item.State)</th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div>@Html.Image(@Url.Content(item.PhotoLink), "Job Offer", "190", "250")</div>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="card-text  pull-left" style="width:250px ;height:180px ;text-overflow:ellipsis; overflow:hidden; margin-bottom:3px;">@Html.DisplayFor(modelItem => item.Description).</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="row center-block">
+                        <button type="button" class="btn btn-warning" data-target="#myModal1" data-toggle="modal" onclick="confirmDelete(@item.ID)">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            Supprimer
+                        </button>
+                        <a class="btn btn-primary" data-target="#myModal2" data-toggle="modal" id="@item.ID" onclick="Contactclient(this.id)"><span class="glyphicon glyphicon-envelope"></span>Contact</a>
+                        <a href="#" class="btn btn-primary" data-target="#myModal" data-toggle="modal" id="@item.ID" onclick="Details(this.id)"><span class="glyphicon glyphicon-sunglasses"></span>Détails</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    <div class="alert alert-info">
+        Affichage @Model.FirstItemOnPage à @Model.LastItemOnPage de @Model.TotalItemCount Missions
+    </div>
+</div>
+<input type="hidden" id="hiddenMissionId" />
+<div class="modal" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Supprimer la mission</h4>
+            </div>
+            <div class="modal-body">
+                Confirmer la suppression de cette mission
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">fermer</a>
+                <a href="#" class="btn btn-default" onclick="DeleteMission()">Supprimer</a>
+                @*<input type="reset" value="Delete" class="btn-success" id="btnSubmit" />*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 class="well text-center">Details du Mission </h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Fermer</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Contacter Le Client :</h4>
+            </div>
+            <div class="modal-body contender1">
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Annuler</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal3" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Envoi du Message</h4>
+            </div>
+            <div class="modal-body contender2">
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function Details(id) {
+        $.get("@Url.Action("Details","Missions")/" + id,
+            function (data) { $('.modal-body').html(data); })
+    }
+    function Contactclient(id) {
+        $.get("@Url.Action("contactClient","Missions")/" + id,
+            function (data) { $('.contender1').html(data); })
+    }
+      var confirmDelete = function (ID) {
+        $("#hiddenMissionId").val(ID);
+    }
+
+    var DeleteMission = function () {
+        var Id = $("#hiddenMissionId").val();
+
+        $.ajax({
+
+            type: "POST",
+            url: '/Admin/DeleteMission',
+            data: JSON.stringify({ 'id': Id }),
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                $("#myModal1").modal("hide");
+                $('.card').closest().remove();
+                location.reload();
+            } 
+
+        })
+
+    }
+</script>

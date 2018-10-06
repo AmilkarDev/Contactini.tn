@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Contactini.Models.Entities.Language>
+@using Contactini.Models
+@{ 
+    Layout = "";
+}
+<div class="panel panel-default">
+    <div style="margin-left:3%; margin-top: 2%;">
+        <span class="IconTitle" style="background-color:#d9534f">
+            <span class="glyphicon glyphicon-list" aria-hidden="true" style="margin-left:26px; margin-top: 23px; color:#FFF;"></span>
+        </span>
+        <h4 style="margin-left: 12%; margin-top: -6%;">Langues</h4>
+        <a href="@Url.Action("LangCreate","myCV")" class="btn btn-primary pull-right" style="margin-top:-6%;margin-right:5px;">
+            <span class="glyphicon glyphicon-plus"></span>Nouveau
+        </a>
+    </div>
+    <div class="panel-body">
+        <div class="row" align="center">
+            @if (Model != null && Model.Any())
+            {
+                foreach (var language in Model)
+                {
+            <div class="col-md-3">
+                @LanguageImage(language.LanguageName)
+
+                <p style="font-size:20px;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">@language.LanguageName</p>
+                <p>@language.LangProficiency</p>
+                <a href="@Url.Action("LangUpdate","myCV" , new {id = language.ID })" style="color:dodgerblue"><span class="glyphicon glyphicon-edit"></span> modifier</a><br />
+                <a href="@Url.Action("LangDelete","myCV", new {id = language.ID })" style="color:dodgerblue"><span class="glyphicon glyphicon-remove"></span> Supprimer</a> 
+            </div>
+
+                  @*<div class=" col-md-3">
+                    <div class="card text-center">
+                    <div class="card-header" style="background-color:grey;color:white;">
+                        @language.LanguageName
+                    </div>
+                    <div class="card-body">
+
+                        @LanguageImage(language.LanguageName)
+
+                    </div>
+                    <div class="card-footer text-muted">
+                        @language.LangProficiency
+                    </div>
+                </div>
+            </div>*@
+                }
+            }
+        </div>
+    </div> <!-- END PANEL BODY -->
+</div>
+
+@helper LanguageImage(string languageName)
+{
+    switch (languageName.ToLower())
+    {
+        case "Arabe":
+            @Html.Image(@Url.Content("~/Content/Images/arab.png"), "mic photo", "85", "85");
+            break;
+
+        case "Français":
+            @Html.Image(@Url.Content("~/Content/Images/french.jpg"), "mic photo", "85", "85");
+
+            break;
+
+        case "Anglais":
+            @Html.Image(@Url.Content("~/Content/Images/english.jpg"), "mic photo", "85", "85");
+
+            break;
+
+        case "Allemand":
+            @Html.Image(@Url.Content("~/Content/Images/german.png"), "mic photo", "85", "85");
+            break;
+        case "Italien":
+            @Html.Image(@Url.Content("~/Content/Images/ital.jpg"), "mic photo", "85", "85");
+            break;
+        default:
+            @Html.Image(@Url.Content("~/Content/Images/lang.jpg"), "mic photo", "85", "85");
+            break;
+    }
+}

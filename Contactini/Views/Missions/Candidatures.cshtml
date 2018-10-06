@@ -1,0 +1,169 @@
+﻿@model IEnumerable<Contactini.Models.Entities.Candidature>
+
+@{
+    ViewBag.Title = "Candidatures";
+    Layout = "~/Views/Shared/ReceptionLayout.cshtml";
+    string str = "";
+}
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<style>
+    .cent {
+        background-color: white;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+    }
+</style>
+<h2 class="well text-center">Candidatures</h2>
+<div class="container">
+
+    @foreach (var item in Model)
+    {
+        switch (item.State.ToString())
+        {
+            case "Acceptée":
+                str = "green";
+                break;
+            case "En_Attente":
+                str = "dodgerblue";
+                break;
+            case "Rejetée":
+                str = "Grey";
+                break;
+        }
+        <div class="col-md-6">
+            <div class="card text-center">
+                <div class="card-header" style="background-color:@str">
+                    <h5 style="color:white;">
+                        @Html.DisplayFor(modelItem => item.Mission.Title)
+                    </h5>
+                </div>
+                <div class="card-body" align="center">
+                    <div>
+                        <h5 class="card-title well well-sm" style="width:50%;color:white; background-color:dodgerblue;">@Html.DisplayFor(modelItem => item.Title)</h5>
+                    </div>
+                    <div style="height:200px; text-overflow:ellipsis ;overflow:hidden; margin-left:2px;margin-right:2px;">@Html.DisplayFor(modelItem => item.Texte)</div>
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="row center-block">
+                        @*<a href="#" class="btn btn-primary">View CV </a>*@
+                        <a class="btn btn-primary" data-target="#myModal1" data-toggle="modal" id="@item.ID" onclick="Accept(this.id)"><span class="glyphicon glyphicon-ok"></span> Accepter</a>
+                        <a class="btn btn-primary" data-target="#myModal4" data-toggle="modal" id="@item.ID" onclick="Reject(this.id)"><span class="glyphicon glyphicon-remove"></span>Refuser</a>
+                        <a class="btn btn-primary" data-target="#myModal" data-toggle="modal" id="@item.ID" onclick="Details(this.id)"><span class="glyphicon glyphicon-plus-sign"></span>Détails</a>
+                        <a class="btn btn-primary" data-target="#myModal2" data-toggle="modal" id="@item.ID" onclick="Contact(this.id)"><span class="glyphicon glyphicon-envelope"></span>Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+<div class="modal" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Détails du Candidature</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Accepter Candidature</h4>
+            </div>
+            <div class="modal-body contender">
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Contacter Le prestataire :</h4>
+            </div>
+            <div class="modal-body contender1">
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Annuler</a>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div class="modal" id="myModal3" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Envoi du Message</h4>
+            </div>
+            <div class="modal-body contender2">
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+    </div>
+</div>*@
+<div class="modal" id="myModal4" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>Rejeter une Candidature </h4>
+            </div>
+            <div class="modal-body contender3">
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+     function Details(id) {
+        $.get("@Url.Action("App_Details","Missions")/" + id,
+            function (data) { $('.modal-body').html(data); })
+    }
+    function Accept(id) {
+        $.get("@Url.Action("AppAccept", "Missions")/" + id,
+            function (data) { $('.contender').html(data); })
+    }
+     function Reject(id) {
+        $.get("@Url.Action("AppReject", "Missions")/" + id,
+            function (data) { $('.contender3').html(data); })
+    }
+    function Contact(id) {
+        $.get("@Url.Action("Send","Missions")/" + id,
+            function (data) { $('.contender1').html(data); })
+    }
+
+     @*function Sent() {
+        $.get("@Url.Action("Sent","Missions")/",
+            function (data) {
+              //  $('#myModal2').hide();
+                $('#myModal3').show();
+                $('.contender2').html(data);
+
+            })
+    }*@
+</script>

@@ -1,0 +1,48 @@
+﻿@model Contactini.Models.Entities.Candidature
+@{ 
+    string str = "";
+}
+@switch (Model.State.ToString())
+{
+    case "Acceptée":
+        str = "green";
+        break;
+    case "En_Attente":
+        str = "dodgerblue";
+        break;
+    case "Rejectée":
+        str = "Grey";
+        break;
+}
+
+
+<div class="container" align="center">
+        <div class="col-md-6">
+            <div class="card text-center">
+                <div class="card-header" style="background-color:@str">
+                    <h5 style="color:white;">
+                        @Html.DisplayFor(model=>model.Title)
+                    </h5>
+                </div>
+                <div class="card-body" align="center">
+                    <div>
+                        <div  class="card-title well well-sm" style="width:50%; background-color:dodgerblue;">
+                            <a style="color:white;" href="@Url.Action("Findex","myCV",new { email = Model.ServiceProvider.Email })" target="_blank">
+                                Consulter mon cv
+                            </a>
+                          
+                        </div>
+                    </div>
+                    <div>@Html.DisplayFor(item => item.Texte)</div>
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="row " style="color:black;">
+                        <div class="pull-left" style="margin-left:5px;"> Date: @Html.DisplayFor(item => item.AppDate)</div>
+                        <div class="pull-right" style="margin-right:5px;">Situation: @Html.DisplayFor(item => item.State)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+</div>

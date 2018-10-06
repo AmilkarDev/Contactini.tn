@@ -1,0 +1,43 @@
+﻿@model Contactini.Models.Entities.Candidature
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/BusinessLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Candidature</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AppDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AppDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Result)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Result)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

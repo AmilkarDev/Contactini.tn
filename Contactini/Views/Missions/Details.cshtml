@@ -1,0 +1,37 @@
+﻿@model Contactini.Models.Entities.Mission
+@using Contactini.Models
+
+    <div class="card text-center">
+        <div class="card-header" style="background-color:dimgrey">
+            <h5 style="color:white;">
+                Secteur : @Html.DisplayFor(model => model.Sector.Name) | Domaine : @Html.DisplayFor(model => model.Domain.Name)
+            </h5>
+        </div>
+        <div class="card-body" align="center">
+            <div>
+                <h5 class="card-title well well-sm" style="width:50%;color:white; background-color:dodgerblue;">@Html.DisplayFor(model => model.Title)</h5>
+            </div>
+            <div style=" margin-left:25px; margin-right:25px;">
+                <table class="table table-bordered">
+                    <tr class="thead-default">
+                        <th class="text-center">Date Publication</th>
+                        <th class="text-center">Date Début</th>
+                        <th class="text-center">Durée</th>
+                        <th class="text-center">Situation</th>
+                    </tr>
+                    <tr>
+                        <th class="text-center">@Html.DisplayFor(model => model.PublishDate)</th>
+                        <th class="text-center">@Html.DisplayFor(model => model.StartDate)</th>
+                        <th class="text-center">@Html.DisplayFor(model => model.Duration)</th>
+                        <th class="text-center">@Html.DisplayFor(model => model.State)</th>
+                    </tr>
+                </table>
+            </div>
+            <p class="card-text">@Html.DisplayFor(model => model.Description).</p>
+        </div>
+        <div class="card-footer text-muted">
+            <div class="row">
+                <p >@Html.DisplayFor(model=>model.Address.DisplayAddress)</p>             
+            </div>
+        </div>
+    </div>

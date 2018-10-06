@@ -1,0 +1,9 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/BusinessLayout.cshtml";
+}
+<div align="center" style="margin-top:10px;margin-bottom:400px;">
+    <p class="alert alert-danger"> @ViewBag.popup !!</p>
+    <p class="btn btn-success">@Html.ActionLink("Retour", null, null, null, new { href = Request.UrlReferrer })</p>
+</div>

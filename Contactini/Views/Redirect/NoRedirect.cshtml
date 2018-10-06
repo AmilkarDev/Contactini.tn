@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "NoRedirect";
+    Layout = "~/Views/Shared/ContinueAsLayout.cshtml";
+}
+
+<h2 class="well text-center">Redirection entre les espaces</h2>
+<p class="alert alert-success">@ViewBag.popup</p>
+<div align="center">
+    <p class="btn btn-success">@Html.ActionLink("Retour", null, null, null, new { href = Request.UrlReferrer })</p>
+</div>

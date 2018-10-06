@@ -1,0 +1,58 @@
+﻿@model IEnumerable<IdentitySample.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2 class="well text-center">Liste d'utilisateurs</h2>
+
+@*<p>
+    <a href="@Url.Action("Nouveau","Create")" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus"></span>Nouveau
+    </a>
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Nom d'Utilisateurs")
+        </th>
+        <th>
+            @Html.DisplayName("Addresse Email")
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+
+            <a href="@Url.Action("Edit","UsersAdmin", new { id = item.Id })" class="btn btn-primary">
+                <span class="glyphicon glyphicon-edit"></span>Modifier
+            </a>
+            <a href="@Url.Action("Details","UsersAdmin", new { id = item.Id })" class="btn btn-primary">
+                <span class="glyphicon glyphicon-sunglasses"></span>Détails
+            </a>
+            <a href="@Url.Action("Delete","UsersAdmin", new { id = item.Id })" class="btn btn-primary">
+                <span class="glyphicon glyphicon-trash"></span>Supprimer
+            </a>
+            <a href="@Url.Action("Block","UsersAdmin", new { id = item.Id })" class="btn btn-primary">
+                <span class="glyphicon glyphicon-ban-circle"></span>Block
+            </a>
+        </td>
+    </tr>
+    }
+
+</table>

@@ -1,0 +1,31 @@
+﻿@model Contactini.Models.Entities.ServiceProvider
+@{ 
+    Layout = "";
+}
+
+<div class="container" align="center">
+    <div class="col-md-6">
+        <div class="card text-center">
+            <div class="card-header" style=" background-color:grey">
+                <h5 style="color:white;">
+                    Secteur : @Html.DisplayFor(model => model.sector.Name) | Domaine : @Html.DisplayFor(model => model.Domain.Name)
+                </h5>
+            </div>
+            <div class="card-body" align="center">
+                <div>
+                    <h5 class="card-title well well-sm" style="width:50%;color:white; background-color:dodgerblue;">@Html.DisplayFor(model => model.Titre)</h5>
+                </div>
+                <div>@Html.DisplayFor(item => item.Description)</div>
+            </div>
+            <div class="card-footer text-muted">
+                <div class="row " style="color:black;">
+                    <div class="pull-left" style="margin-left:5px;"> Email: @Html.DisplayFor(item => item.Email)</div>
+                    <div class="pull-right" style="margin-right:5px;">Téléphone: @Html.DisplayFor(item => item.PhoneNum)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
