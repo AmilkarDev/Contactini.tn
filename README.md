@@ -1,7 +1,6 @@
 # Contactini.tn
 
-ASP MVC application that I developed in order to help people find & rate all type of services around them , besides it helps artisans and local community members to provide, show and offer their services all in one place , the cool idea that makes this application vital for almost everybody in the community , is that it's not a freelance platform, it's a platform where you can find all type of services  
-,whether it's gonna be done online , remotely or locally, you may find someone to tutor you on some specific subject, the same way that you may find someone who can will fix the toilet door , all with the same process, Contactini will provide you with all the details about all the available service providers , their ratings and their availability , and much more options are on their way to this platform ...  
+ASP MVC application that I developed in order to help people find & rate all type of services around them , besides it helps artisans and local community members to provide, show and offer their services all in one place , the cool idea that makes this application vital for almost everybody in the community , is that it's not a freelance platform, it's a platform where you can find all type of services ,whether it's gonna be done online , remotely or locally, you may find someone to tutor you on some specific subject, the same way that you may find someone who can will fix the toilet door , all with the same process, Contactini will provide you with all the details about all the available service providers , their ratings and their availability , and much more options are on their way to this platform ...  
 
 # Technologies 
 
